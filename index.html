@@ -523,6 +523,7 @@
     padding-bottom:1rem;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
   }
   .cuts-scroll::-webkit-scrollbar{height:6px;}
   .cuts-scroll::-webkit-scrollbar-thumb{background:var(--steel-dim);}
@@ -687,6 +688,7 @@
       flex-wrap:nowrap;
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
+      overscroll-behavior-x:contain;
       scrollbar-width:none;
       top:56px;
     }
