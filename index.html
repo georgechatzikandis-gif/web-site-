@@ -328,29 +328,36 @@
   .cuts-media::before{content:'';position:absolute;inset:0;background-image:url('photo-interior.jpg');background-size:cover;background-position:center;}
   .cuts-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,15,.85),rgba(14,14,15,.93));}
   .cuts>.section-head,.cuts>.cuts-scroll{position:relative;z-index:2;}
-  .cuts .section-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.6rem;}
+  .cuts .section-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.4rem;}
   .cuts h2{font-size:clamp(2rem,4.4vw,3.2rem);color:var(--bone);margin-top:.8rem;}
-  .cuts-hint{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--steel-dim);display:flex;align-items:center;gap:.6rem;}
-  .cuts-hint svg{width:30px;height:10px;}
-  .cuts-scroll{display:flex;gap:1.4rem;overflow-x:auto;padding-bottom:1.4rem;scroll-snap-type:x mandatory;cursor:grab;scrollbar-width:thin;scrollbar-color:var(--steel-dim) transparent;}
-  .cuts-scroll.dragging{cursor:grabbing;scroll-snap-type:none;}
-  .cuts-scroll::-webkit-scrollbar{height:5px;}
-  .cuts-scroll::-webkit-scrollbar-thumb{background:var(--steel-dim);border-radius:4px;}
-  .cuts-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.06);}
-  .cut-card{
-    flex:0 0 clamp(260px,32vw,340px);scroll-snap-align:start;
-    border:1px solid var(--line);padding:2rem 1.7rem 1.8rem;
-    background:rgba(20,20,24,.66);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
-    display:flex;flex-direction:column;min-height:300px;position:relative;
-    transition:transform .5s var(--ease),background .4s ease,border-color .4s ease;
+  .cuts-nav{display:flex;gap:.7rem;}
+  .cuts-arrow{
+    width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:transparent;
+    color:var(--bone);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background .35s var(--ease),border-color .35s ease,color .35s ease,opacity .3s ease;
   }
-  .cut-card:hover{transform:translateY(-7px);background:rgba(28,26,24,.82);border-color:rgba(166,48,48,.55);}
-  .cut-index{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--oxblood-bright);letter-spacing:.1em;}
-  .cut-card h3{font-size:1.4rem;color:var(--bone);margin-top:.9rem;}
-  .cut-divider{width:34px;height:2px;background:var(--oxblood-bright);margin:1rem 0 1.1rem;transition:width .5s var(--ease);}
-  .cut-card:hover .cut-divider{width:60px;}
-  .cut-card p{font-size:.92rem;line-height:1.65;color:var(--steel);flex:1;}
-  .cut-tag{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel-dim);margin-top:1.4rem;}
+  .cuts-arrow:hover{background:var(--oxblood-bright);border-color:var(--oxblood-bright);}
+  .cuts-arrow svg{width:18px;height:18px;}
+  .cuts-arrow:disabled{opacity:.3;cursor:default;background:transparent;border-color:var(--line);}
+  .cuts-scroll{display:flex;gap:1.4rem;overflow-x:auto;padding-bottom:1.2rem;scroll-snap-type:x mandatory;cursor:grab;scroll-behavior:smooth;scrollbar-width:none;}
+  .cuts-scroll.dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;}
+  .cuts-scroll::-webkit-scrollbar{display:none;}
+  .cut-card{
+    flex:0 0 clamp(250px,30vw,330px);scroll-snap-align:start;
+    border:1px solid var(--line);overflow:hidden;position:relative;background:var(--ink-soft);
+    display:flex;flex-direction:column;
+    transition:transform .5s var(--ease),border-color .4s ease;
+  }
+  .cut-card:hover{transform:translateY(-7px);border-color:rgba(166,48,48,.55);}
+  .cut-photo{position:relative;aspect-ratio:4/5;overflow:hidden;}
+  .cut-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);}
+  .cut-card:hover .cut-photo img{transform:scale(1.07);}
+  .cut-badge{
+    position:absolute;top:.75rem;left:.75rem;background:rgba(14,14,15,.82);color:var(--bone);
+    font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;
+    padding:.34rem .62rem;border-radius:3px;
+  }
+  .cut-card h3{font-size:1.12rem;color:var(--bone);padding:1rem 1.1rem 1.2rem;letter-spacing:.02em;}
 
   /* ============ QUOTE INTERSTITIAL ============ */
   .quote{
@@ -364,45 +371,6 @@
   .quote-mark{font-family:'Oswald',sans-serif;font-size:5rem;line-height:.5;color:var(--oxblood-bright);display:block;margin-bottom:1rem;}
   .quote blockquote{font-family:'Oswald',sans-serif;font-weight:300;text-transform:uppercase;letter-spacing:.03em;font-size:clamp(1.5rem,4.2vw,2.8rem);line-height:1.22;}
   .quote cite{display:block;margin-top:1.6rem;font-family:'Space Mono',monospace;font-style:normal;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);}
-
-  /* ============ MENU ============ */
-  .menu{background:var(--bone);}
-  .menu .section-head{text-align:center;margin-bottom:1.8rem;}
-  .menu .section-head .eyebrow{justify-content:center;}
-  .menu h2{font-size:clamp(2rem,4.4vw,3.2rem);margin-top:.8rem;color:var(--ink);}
-  .menu-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-bottom:2.6rem;}
-  .menu-tab{
-    font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
-    padding:.6rem 1.2rem;border:1px solid var(--line-dark);border-radius:40px;background:transparent;
-    color:var(--graphite);cursor:pointer;transition:color .35s var(--ease),background .35s var(--ease),border-color .35s var(--ease);
-  }
-  .menu-tab:hover{border-color:var(--oxblood-bright);color:var(--oxblood-bright);}
-  .menu-tab.active{background:var(--oxblood-bright);border-color:var(--oxblood-bright);color:var(--bone);}
-  .menu-count{opacity:.6;margin-left:.45em;font-size:.92em;}
-  .menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;}
-  .menu-card{
-    position:relative;overflow:hidden;border:1px solid var(--line-dark);background:#fff;
-    display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s ease;
-  }
-  .menu-card.hide{display:none;}
-  .menu-card.pop{animation:menuPop .5s var(--ease) both;}
-  @keyframes menuPop{from{opacity:0;transform:translateY(16px) scale(.98);}to{opacity:1;transform:none;}}
-  .menu-card:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(14,14,15,.16);}
-  .menu-thumb{position:relative;aspect-ratio:4/5;overflow:hidden;}
-  .menu-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);}
-  .menu-card:hover .menu-thumb img{transform:scale(1.08);}
-  .menu-cat{
-    position:absolute;top:.7rem;left:.7rem;z-index:2;background:rgba(14,14,15,.82);color:var(--bone);
-    font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;
-    padding:.32rem .6rem;border-radius:3px;
-  }
-  .menu-info{padding:.95rem 1rem 1.1rem;}
-  .menu-info h3{font-size:1.02rem;letter-spacing:.02em;color:var(--ink);line-height:1.18;}
-  .menu-empty{display:none;text-align:center;padding:3rem 1rem;color:var(--steel-dim);font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;}
-  .menu-empty.show{display:block;}
-  @media (max-width:980px){.menu-grid{grid-template-columns:repeat(3,1fr);}}
-  @media (max-width:680px){.menu-grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:380px){.menu-grid{grid-template-columns:1fr;}}
 
   /* ============ VISIT ============ */
   .visit{background:var(--ink);color:var(--bone);display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,6vw,5rem);align-items:center;}
@@ -504,7 +472,6 @@
   <nav class="nav" id="nav">
     <a href="#about">Ιστορία</a>
     <a href="#cuts">Επιλεγμένα</a>
-    <a href="#menu">Μενού</a>
     <a href="#visit">Επισκεφθείτε</a>
   </nav>
   <a href="tel:+302241092459" class="header-call">
@@ -517,7 +484,6 @@
 <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <a href="#about">Ιστορία</a>
   <a href="#cuts">Επιλεγμένα Κρέατα</a>
-  <a href="#menu">Το Μενού</a>
   <a href="#visit">Επισκεφθείτε μας</a>
   <a href="tel:+302241092459">Καλέστε για παραγγελία</a>
 </nav>
@@ -592,95 +558,40 @@
     <div class="cuts-media" data-parallax="0.1" aria-hidden="true"></div>
     <div class="section-head wrap reveal">
       <div>
-        <p class="eyebrow">Από τον πάγκο</p>
+        <p class="eyebrow">Ο πάγκος μας</p>
         <h2>Επιλεγμένα κρέατα</h2>
       </div>
-      <div class="cuts-hint">Σύρετε
-        <svg viewBox="0 0 30 10" fill="none"><path d="M0 5h26M26 5l-4-4M26 5l-4 4" stroke="currentColor" stroke-width="1.2"/></svg>
+      <div class="cuts-nav">
+        <button class="cuts-arrow" id="cutsPrev" aria-label="Προηγούμενο">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="cuts-arrow" id="cutsNext" aria-label="Επόμενο">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </div>
     <div class="cuts-scroll wrap reveal" id="cutsScroll" data-delay="1">
       <article class="cut-card">
-        <p class="cut-index">01</p>
-        <h3>Ξηρή Ωρίμανση Ριμπάι</h3>
-        <div class="cut-divider"></div>
-        <p>Ωριμασμένο 35 ημέρες στο δικό μας θάλαμο για πιο βαθιά, σχεδόν ξηρή γεύση και τρυφερή υφή.</p>
-        <p class="cut-tag">Ωρίμανση 35 ημερών</p>
+        <div class="cut-photo"><span class="cut-badge">Μοσχάρι</span><img src="menu/mpiftekia.jpg" alt="Μπιφτέκια μοσχαρίσια" loading="lazy"></div>
+        <h3>Μπιφτέκια Σχάρας</h3>
       </article>
       <article class="cut-card">
-        <p class="cut-index">02</p>
-        <h3>Σπιτική Πανσέτα</h3>
-        <div class="cut-divider"></div>
-        <p>Παρασκευασμένη με αλάτι, πιπέρι και χρόνο — τίποτα άλλο. Κομμένη λεπτή, έτοιμη για το τηγάνι.</p>
-        <p class="cut-tag">Ωρίμανση 21 ημερών</p>
+        <div class="cut-photo"><span class="cut-badge">Μοσχάρι</span><img src="menu/mosxari-vac.jpg" alt="Μοσχάρι σε φέτες, συσκευασία κενού" loading="lazy"></div>
+        <h3>Μοσχάρι σε Φέτες</h3>
       </article>
       <article class="cut-card">
-        <p class="cut-index">03</p>
-        <h3>Χωριάτικο Λουκάνικο</h3>
-        <div class="cut-divider"></div>
-        <p>Αλεσμένο φρέσκο κάθε πρωί από τα υπολείμματα του ημερήσιου τεμαχισμού.</p>
-        <p class="cut-tag">Φρέσκο καθημερινά</p>
+        <div class="cut-photo"><span class="cut-badge">Χοιρινό</span><img src="menu/rola-gemista.jpg" alt="Χοιρινά ρολά γεμιστά" loading="lazy"></div>
+        <h3>Ρολό Γεμιστό</h3>
       </article>
       <article class="cut-card">
-        <p class="cut-index">04</p>
-        <h3>Καπνιστός Ώμος Αρνίσιος</h3>
-        <div class="cut-divider"></div>
-        <p>Σιγά σιγά πάνω από ξύλο οπωροφόρου δέντρου μέχρι να ξεκολλήσει από το κόκαλο. Ζητήστε το ολόκληρο ή ξεκοκαλισμένο.</p>
-        <p class="cut-tag">Κάπνισμα 6 ωρών</p>
+        <div class="cut-photo"><span class="cut-badge">Κοτόπουλο</span><img src="menu/rola-dixti.jpg" alt="Κοτόπουλο ρολό σε δίχτυ" loading="lazy"></div>
+        <h3>Ρολό σε Δίχτυ</h3>
       </article>
       <article class="cut-card">
-        <p class="cut-index">05</p>
-        <h3>Πιατέλα Αλλαντικών</h3>
-        <div class="cut-divider"></div>
-        <p>Μια εναλλασσόμενη επιλογή από τα αλλαντικά μας, ετοιμασμένη φρέσκια κατά παραγγελία στον πάγκο.</p>
-        <p class="cut-tag">Κατά παραγγελία</p>
-      </article>
-      <article class="cut-card">
-        <p class="cut-index">06</p>
-        <h3>Σουβλάκι Κοτόπουλο</h3>
-        <div class="cut-divider"></div>
-        <p>Μαριναρισμένο μπούτι κοτόπουλου σε ξυλάκι, με πιπεριά και μπαχαρικά, έτοιμο για τη σχάρα.</p>
-        <p class="cut-tag">Φρέσκο καθημερινά</p>
+        <div class="cut-photo"><span class="cut-badge">Κοτόπουλο</span><img src="menu/mpiftekia-xlomo.jpg" alt="Κοτομπιφτέκια" loading="lazy"></div>
+        <h3>Μπιφτέκια Κοτόπουλο</h3>
       </article>
     </div>
-  </section>
-
-  <!-- ===================== MENU ===================== -->
-  <section class="menu section" id="menu">
-    <div class="section-head wrap reveal">
-      <p class="eyebrow">Ο πάγκος μας</p>
-      <h2>Το μενού</h2>
-    </div>
-    <div class="menu-tabs wrap reveal" id="menuTabs" data-delay="1">
-      <button class="menu-tab active" data-cat="all">Όλα</button>
-      <button class="menu-tab" data-cat="moscari">Μοσχάρι</button>
-      <button class="menu-tab" data-cat="xoirino">Χοιρινό</button>
-      <button class="menu-tab" data-cat="kotopoulo">Κοτόπουλο</button>
-      <button class="menu-tab" data-cat="allantika">Αλλαντικά</button>
-    </div>
-    <div class="menu-grid wrap reveal" id="menuGrid" data-delay="2">
-      <article class="menu-card" data-cat="moscari">
-        <div class="menu-thumb"><span class="menu-cat">Μοσχάρι</span><img src="menu/mpiftekia.jpg" alt="Μπιφτέκια μοσχαρίσια" loading="lazy"></div>
-        <div class="menu-info"><h3>Μπιφτέκια Σχάρας</h3></div>
-      </article>
-      <article class="menu-card" data-cat="moscari">
-        <div class="menu-thumb"><span class="menu-cat">Μοσχάρι</span><img src="menu/mosxari-vac.jpg" alt="Μοσχάρι σε φέτες, συσκευασία κενού" loading="lazy"></div>
-        <div class="menu-info"><h3>Μοσχάρι σε Φέτες</h3></div>
-      </article>
-      <article class="menu-card" data-cat="xoirino">
-        <div class="menu-thumb"><span class="menu-cat">Χοιρινό</span><img src="menu/rola-gemista.jpg" alt="Χοιρινά ρολά γεμιστά" loading="lazy"></div>
-        <div class="menu-info"><h3>Ρολό Γεμιστό</h3></div>
-      </article>
-      <article class="menu-card" data-cat="kotopoulo">
-        <div class="menu-thumb"><span class="menu-cat">Κοτόπουλο</span><img src="menu/rola-dixti.jpg" alt="Κοτόπουλο ρολό σε δίχτυ" loading="lazy"></div>
-        <div class="menu-info"><h3>Ρολό σε Δίχτυ</h3></div>
-      </article>
-      <article class="menu-card" data-cat="kotopoulo">
-        <div class="menu-thumb"><span class="menu-cat">Κοτόπουλο</span><img src="menu/mpiftekia-xlomo.jpg" alt="Κοτομπιφτέκια" loading="lazy"></div>
-        <div class="menu-info"><h3>Μπιφτέκια Κοτόπουλο</h3></div>
-      </article>
-    </div>
-    <p class="menu-empty" id="menuEmpty">Προστίθενται σύντομα.</p>
   </section>
 
   <!-- ===================== QUOTE INTERSTITIAL ===================== -->
@@ -748,7 +659,6 @@
     <ul class="footer-links">
       <li><a href="#about">Ιστορία</a></li>
       <li><a href="#cuts">Επιλεγμένα Κρέατα</a></li>
-      <li><a href="#menu">Το Μενού</a></li>
       <li><a href="#visit">Επισκεφθείτε μας</a></li>
     </ul>
   </div>
@@ -945,40 +855,29 @@
     scroller.addEventListener('click', function(e){ if(moved){ e.preventDefault(); } }, true);
   }
 
-  /* ---------- MENU FILTER ---------- */
+  /* ---------- CUTS CAROUSEL ARROWS ---------- */
   (function(){
-    var tabs = [].slice.call(document.querySelectorAll('.menu-tab'));
-    var cards = [].slice.call(document.querySelectorAll('.menu-card'));
-    var empty = document.getElementById('menuEmpty');
-    if(!tabs.length) return;
-    // show live counts on each tab
-    tabs.forEach(function(t){
-      var cat = t.getAttribute('data-cat');
-      var n = cat==='all' ? cards.length : cards.filter(function(c){return c.getAttribute('data-cat')===cat;}).length;
-      var s = document.createElement('span'); s.className='menu-count'; s.textContent=n;
-      t.appendChild(s);
-    });
-    function filter(cat){
-      var shown = 0;
-      cards.forEach(function(c){
-        var match = cat==='all' || c.getAttribute('data-cat')===cat;
-        c.classList.toggle('hide', !match);
-        if(match){
-          c.classList.remove('pop');
-          // re-trigger entrance animation with a small stagger
-          if(!reduced){ void c.offsetWidth; c.style.animationDelay=(shown*0.04)+'s'; c.classList.add('pop'); }
-          shown++;
-        }
-      });
-      if(empty) empty.classList.toggle('show', shown===0);
+    var sc = document.getElementById('cutsScroll');
+    var prev = document.getElementById('cutsPrev');
+    var next = document.getElementById('cutsNext');
+    if(!sc || !prev || !next) return;
+    function step(){
+      var card = sc.querySelector('.cut-card');
+      if(!card) return sc.clientWidth * 0.8;
+      var cs = getComputedStyle(sc);
+      var gap = parseFloat(cs.columnGap || cs.gap) || 22;
+      return card.getBoundingClientRect().width + gap;
     }
-    tabs.forEach(function(t){
-      t.addEventListener('click', function(){
-        tabs.forEach(function(x){x.classList.remove('active');});
-        t.classList.add('active');
-        filter(t.getAttribute('data-cat'));
-      });
-    });
+    function update(){
+      var max = sc.scrollWidth - sc.clientWidth - 2;
+      prev.disabled = sc.scrollLeft <= 2;
+      next.disabled = sc.scrollLeft >= max;
+    }
+    prev.addEventListener('click', function(){ sc.scrollBy({left:-step(), behavior:'smooth'}); });
+    next.addEventListener('click', function(){ sc.scrollBy({left:step(), behavior:'smooth'}); });
+    sc.addEventListener('scroll', function(){ requestAnimationFrame(update); }, {passive:true});
+    window.addEventListener('resize', update);
+    update();
   })();
 
   /* ---------- MAGNETIC BUTTONS ---------- */
