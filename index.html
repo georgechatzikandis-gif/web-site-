@@ -327,9 +327,18 @@
   .cuts-media{position:absolute;inset:-12% 0;z-index:0;will-change:transform;}
   .cuts-media::before{content:'';position:absolute;inset:0;background-image:url('photo-interior.jpg');background-size:cover;background-position:center;}
   .cuts-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,15,.85),rgba(14,14,15,.93));}
-  .cuts>.section-head,.cuts>.cuts-scroll{position:relative;z-index:2;}
-  .cuts .section-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.4rem;}
+  .cuts>.section-head,.cuts>.cuts-filter,.cuts>.cuts-scroll{position:relative;z-index:2;}
+  .cuts .section-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1.6rem;}
   .cuts h2{font-size:clamp(2rem,4.4vw,3.2rem);color:var(--bone);margin-top:.8rem;}
+  .cuts-filter{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem;}
+  .cuts-tab{
+    font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:.55rem 1.15rem;border:1px solid var(--line);border-radius:40px;background:transparent;
+    color:var(--steel);cursor:pointer;transition:color .35s var(--ease),background .35s var(--ease),border-color .35s var(--ease);
+  }
+  .cuts-tab:hover{border-color:var(--oxblood-bright);color:var(--bone);}
+  .cuts-tab.active{background:var(--oxblood-bright);border-color:var(--oxblood-bright);color:var(--bone);}
+  .cuts-tab .c{opacity:.6;margin-left:.4em;}
   .cuts-nav{display:flex;gap:.7rem;}
   .cuts-arrow{
     width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:transparent;
@@ -349,6 +358,9 @@
     transition:transform .5s var(--ease),border-color .4s ease;
   }
   .cut-card:hover{transform:translateY(-7px);border-color:rgba(166,48,48,.55);}
+  .cut-card.hide{display:none;}
+  .cut-card.pop{animation:cutPop .5s var(--ease) both;}
+  @keyframes cutPop{from{opacity:0;transform:translateY(14px) scale(.98);}to{opacity:1;transform:none;}}
   .cut-photo{position:relative;aspect-ratio:4/5;overflow:hidden;}
   .cut-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);}
   .cut-card:hover .cut-photo img{transform:scale(1.07);}
@@ -570,26 +582,53 @@
         </button>
       </div>
     </div>
+    <div class="cuts-filter wrap reveal" id="cutsFilter">
+      <button class="cuts-tab active" data-cat="all">Όλα</button>
+      <button class="cuts-tab" data-cat="kotopoulo">Κοτόπουλα</button>
+      <button class="cuts-tab" data-cat="xoirino">Χοιρινά</button>
+      <button class="cuts-tab" data-cat="moscari">Μοσχαρίσια</button>
+      <button class="cuts-tab" data-cat="allantika">Αλλαντικά</button>
+    </div>
     <div class="cuts-scroll wrap reveal" id="cutsScroll" data-delay="1">
-      <article class="cut-card">
-        <div class="cut-photo"><span class="cut-badge">Μοσχάρι</span><img src="menu/mpiftekia.jpg" alt="Μπιφτέκια μοσχαρίσια" loading="lazy"></div>
-        <h3>Μπιφτέκια Σχάρας</h3>
+      <article class="cut-card" data-cat="kotopoulo">
+        <div class="cut-photo"><span class="cut-badge">Κοτόπουλο</span><img src="menu/kotopoulo-olokliro.jpg" alt="Ολόκληρα μαριναρισμένα κοτόπουλα" loading="lazy"></div>
+        <h3>Κοτόπουλο Μαριναρισμένο</h3>
       </article>
-      <article class="cut-card">
-        <div class="cut-photo"><span class="cut-badge">Μοσχάρι</span><img src="menu/mosxari-vac.jpg" alt="Μοσχάρι σε φέτες, συσκευασία κενού" loading="lazy"></div>
-        <h3>Μοσχάρι σε Φέτες</h3>
+      <article class="cut-card" data-cat="kotopoulo">
+        <div class="cut-photo"><span class="cut-badge">Κοτόπουλο</span><img src="menu/souvlaki-kotopoulo.jpg" alt="Σουβλάκι κοτόπουλο με πιπεριά" loading="lazy"></div>
+        <h3>Σουβλάκι με Πιπεριά</h3>
       </article>
-      <article class="cut-card">
-        <div class="cut-photo"><span class="cut-badge">Χοιρινό</span><img src="menu/rola-gemista.jpg" alt="Χοιρινά ρολά γεμιστά" loading="lazy"></div>
-        <h3>Ρολό Γεμιστό</h3>
-      </article>
-      <article class="cut-card">
+      <article class="cut-card" data-cat="kotopoulo">
         <div class="cut-photo"><span class="cut-badge">Κοτόπουλο</span><img src="menu/rola-dixti.jpg" alt="Κοτόπουλο ρολό σε δίχτυ" loading="lazy"></div>
         <h3>Ρολό σε Δίχτυ</h3>
       </article>
-      <article class="cut-card">
+      <article class="cut-card" data-cat="kotopoulo">
         <div class="cut-photo"><span class="cut-badge">Κοτόπουλο</span><img src="menu/mpiftekia-xlomo.jpg" alt="Κοτομπιφτέκια" loading="lazy"></div>
         <h3>Μπιφτέκια Κοτόπουλο</h3>
+      </article>
+      <article class="cut-card" data-cat="xoirino">
+        <div class="cut-photo"><span class="cut-badge">Χοιρινό</span><img src="menu/panseta.jpg" alt="Πανσέτα και χοιρινά στη βιτρίνα" loading="lazy"></div>
+        <h3>Πανσέτα &amp; Χοιρινά</h3>
+      </article>
+      <article class="cut-card" data-cat="xoirino">
+        <div class="cut-photo"><span class="cut-badge">Χοιρινό</span><img src="menu/rola-gemista.jpg" alt="Χοιρινά ρολά γεμιστά" loading="lazy"></div>
+        <h3>Ρολό Γεμιστό</h3>
+      </article>
+      <article class="cut-card" data-cat="moscari">
+        <div class="cut-photo"><span class="cut-badge">Μοσχάρι</span><img src="menu/mpiftekia.jpg" alt="Μπιφτέκια μοσχαρίσια" loading="lazy"></div>
+        <h3>Μπιφτέκια Σχάρας</h3>
+      </article>
+      <article class="cut-card" data-cat="moscari">
+        <div class="cut-photo"><span class="cut-badge">Μοσχάρι</span><img src="menu/mosxari-vac.jpg" alt="Μοσχάρι σε φέτες, συσκευασία κενού" loading="lazy"></div>
+        <h3>Μοσχάρι σε Φέτες</h3>
+      </article>
+      <article class="cut-card" data-cat="allantika">
+        <div class="cut-photo"><span class="cut-badge">Αλλαντικά</span><img src="menu/allantika-loukanika.jpg" alt="Λουκάνικα και αλλαντικά" loading="lazy"></div>
+        <h3>Λουκάνικα Καπνιστά</h3>
+      </article>
+      <article class="cut-card" data-cat="allantika">
+        <div class="cut-photo"><span class="cut-badge">Αλλαντικά</span><img src="menu/allantika-vlaxos.jpg" alt="Αλλαντικά και λουκάνικα" loading="lazy"></div>
+        <h3>Αλλαντικά &amp; Λουκάνικα</h3>
       </article>
     </div>
   </section>
@@ -855,14 +894,17 @@
     scroller.addEventListener('click', function(e){ if(moved){ e.preventDefault(); } }, true);
   }
 
-  /* ---------- CUTS CAROUSEL ARROWS ---------- */
+  /* ---------- CUTS MENU: FILTER + CAROUSEL ARROWS ---------- */
   (function(){
     var sc = document.getElementById('cutsScroll');
     var prev = document.getElementById('cutsPrev');
     var next = document.getElementById('cutsNext');
     if(!sc || !prev || !next) return;
+    var cards = [].slice.call(sc.querySelectorAll('.cut-card'));
+    var tabs = [].slice.call(document.querySelectorAll('.cuts-tab'));
+    function visibleCard(){ return sc.querySelector('.cut-card:not(.hide)'); }
     function step(){
-      var card = sc.querySelector('.cut-card');
+      var card = visibleCard();
       if(!card) return sc.clientWidth * 0.8;
       var cs = getComputedStyle(sc);
       var gap = parseFloat(cs.columnGap || cs.gap) || 22;
@@ -870,13 +912,42 @@
     }
     function update(){
       var max = sc.scrollWidth - sc.clientWidth - 2;
-      prev.disabled = sc.scrollLeft <= 2;
-      next.disabled = sc.scrollLeft >= max;
+      var noScroll = max <= 2;
+      prev.disabled = noScroll || sc.scrollLeft <= 2;
+      next.disabled = noScroll || sc.scrollLeft >= max;
     }
     prev.addEventListener('click', function(){ sc.scrollBy({left:-step(), behavior:'smooth'}); });
     next.addEventListener('click', function(){ sc.scrollBy({left:step(), behavior:'smooth'}); });
     sc.addEventListener('scroll', function(){ requestAnimationFrame(update); }, {passive:true});
     window.addEventListener('resize', update);
+
+    // live counts per tab
+    tabs.forEach(function(t){
+      var cat = t.getAttribute('data-cat');
+      var n = cat==='all' ? cards.length : cards.filter(function(c){return c.getAttribute('data-cat')===cat;}).length;
+      var s = document.createElement('span'); s.className='c'; s.textContent=n; t.appendChild(s);
+    });
+    function filter(cat){
+      var shown = 0;
+      cards.forEach(function(c){
+        var match = cat==='all' || c.getAttribute('data-cat')===cat;
+        c.classList.toggle('hide', !match);
+        if(match){
+          c.classList.remove('pop');
+          if(!reduced){ void c.offsetWidth; c.style.animationDelay=(shown*0.05)+'s'; c.classList.add('pop'); }
+          shown++;
+        }
+      });
+      sc.scrollLeft = 0;
+      update();
+    }
+    tabs.forEach(function(t){
+      t.addEventListener('click', function(){
+        tabs.forEach(function(x){x.classList.remove('active');});
+        t.classList.add('active');
+        filter(t.getAttribute('data-cat'));
+      });
+    });
     update();
   })();
 
