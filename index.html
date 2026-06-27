@@ -515,6 +515,32 @@
     color:var(--bone);
   }
   .cuts .section-head h2{color:var(--bone);}
+  .cuts-filter{
+    display:flex;
+    gap:0.6rem;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    margin-bottom:1.6rem;
+    padding-bottom:0.2rem;
+  }
+  .cuts-filter::-webkit-scrollbar{display:none;}
+  .cuts-filter .filter-btn{
+    flex-shrink:0;
+    color:var(--bone-dim);
+    border-color:var(--steel-dim);
+  }
+  .cuts-filter .filter-btn:hover{
+    border-color:var(--oxblood-bright);
+    color:var(--oxblood-bright);
+  }
+  .cuts-filter .filter-btn.active{
+    background:var(--bone);
+    border-color:var(--bone);
+    color:var(--ink);
+  }
   .cuts-scroll{
     display:flex;
     gap:1.2rem;
@@ -527,6 +553,7 @@
   .cuts-scroll::-webkit-scrollbar{height:6px;}
   .cuts-scroll::-webkit-scrollbar-thumb{background:var(--steel-dim);}
   .cuts-scroll::-webkit-scrollbar-track{background:var(--ink-soft);}
+  .cut-card.hide{display:none;}
 
   .cut-card{
     flex:0 0 clamp(240px, 30vw, 300px);
@@ -1031,36 +1058,43 @@
       <h2>Επιλεγμένα κρέατα</h2>
     </div>
 
-    <div class="cuts-scroll reveal">
-      <div class="cut-card">
+    <div class="cuts-filter" id="cutsFilter" role="group" aria-label="Φιλτράρισμα κρεάτων ανά κατηγορία">
+      <button class="filter-btn active" data-filter="orimansi">Ωρίμανση</button>
+      <button class="filter-btn" data-filter="freska">Φρέσκα</button>
+      <button class="filter-btn" data-filter="kapnista">Καπνιστά</button>
+      <button class="filter-btn" data-filter="allantika">Αλλαντικά</button>
+    </div>
+
+    <div class="cuts-scroll reveal" id="cutsScroll">
+      <div class="cut-card" data-category="orimansi">
         <p class="cut-index">01</p>
         <h3>Ξηρή Ωρίμανση Ριμπάι</h3>
         <div class="cut-divider"></div>
         <p>Ωριμασμένο 35 ημέρες στο δικό μας θάλαμο για πιο βαθιά, σχεδόν ξηρή γεύση και τρυφερή υφή.</p>
         <p class="cut-tag">Ωρίμανση 35 ημερών</p>
       </div>
-      <div class="cut-card">
+      <div class="cut-card" data-category="orimansi">
         <p class="cut-index">02</p>
         <h3>Σπιτική Πανσέτα</h3>
         <div class="cut-divider"></div>
         <p>Παρασκευασμένη με αλάτι, πιπέρι και χρόνο — τίποτα άλλο. Κομμένη λεπτή, έτοιμη για το τηγάνι.</p>
         <p class="cut-tag">Ωρίμανση 21 ημερών</p>
       </div>
-      <div class="cut-card">
+      <div class="cut-card" data-category="freska">
         <p class="cut-index">03</p>
         <h3>Χωριάτικο Λουκάνικο</h3>
         <div class="cut-divider"></div>
         <p>Αλεσμένο φρέσκο κάθε πρωί από τα υπολείμματα του ημερήσιου τεμαχισμού.</p>
         <p class="cut-tag">Φρέσκο καθημερινά</p>
       </div>
-      <div class="cut-card">
+      <div class="cut-card" data-category="kapnista">
         <p class="cut-index">04</p>
         <h3>Καπνιστός Ώμος Αρνίσιος</h3>
         <div class="cut-divider"></div>
         <p>Σιγά σιγά πάνω από ξύλο οπωροφόρου δέντρου μέχρι να ξεκολλήσει από το κόκαλο. Ζητήστε το ολόκληρο ή ξεκοκαλισμένο.</p>
         <p class="cut-tag">Κάπνισμα 6 ωρών</p>
       </div>
-      <div class="cut-card">
+      <div class="cut-card" data-category="allantika">
         <p class="cut-index">05</p>
         <h3>Πιατέλα Αλλαντικών</h3>
         <div class="cut-divider"></div>
@@ -1989,6 +2023,31 @@
       );
       stuckIo.observe(sentinel);
     }
+  }
+
+  // cuts filter: show/hide cut-cards by data-category, toggle active pill
+  const cutsFilterEl = document.getElementById('cutsFilter');
+  const cutsScrollEl = document.getElementById('cutsScroll');
+  if (cutsFilterEl && cutsScrollEl) {
+    const cutsFilterBtns = cutsFilterEl.querySelectorAll('.filter-btn');
+    const cutCards = cutsScrollEl.querySelectorAll('.cut-card');
+    const applyCutsFilter = (filter) => {
+      cutCards.forEach(card => {
+        const matches = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hide', !matches);
+      });
+      cutsScrollEl.scrollTo({ left: 0, behavior: 'auto' });
+    };
+    cutsFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        cutsFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyCutsFilter(filter);
+      });
+    });
+    const initialCutsBtn = cutsFilterEl.querySelector('.filter-btn.active');
+    if (initialCutsBtn) applyCutsFilter(initialCutsBtn.dataset.filter);
   }
 
   // hours table: highlight today, compute live open/closed status
