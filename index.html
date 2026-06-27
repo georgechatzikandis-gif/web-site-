@@ -1078,8 +1078,7 @@
     </div>
 
     <div class="products-filter" id="productsFilter" role="group" aria-label="Φιλτράρισμα προϊόντων ανά κρέας">
-      <button class="filter-btn active" data-filter="all">Όλα</button>
-      <button class="filter-btn" data-filter="moscari">Μοσχάρι</button>
+      <button class="filter-btn active" data-filter="moscari">Μοσχάρι</button>
       <button class="filter-btn" data-filter="xoirino">Χοιρινό</button>
       <button class="filter-btn" data-filter="kotopoulo">Κοτόπουλο</button>
       <button class="filter-btn" data-filter="arni">Αρνί</button>
@@ -1963,17 +1962,22 @@
   if (productsFilterEl && productsGridEl) {
     const filterBtns = productsFilterEl.querySelectorAll('.filter-btn');
     const productCards = productsGridEl.querySelectorAll('.product-card');
+    const applyFilter = (filter) => {
+      productCards.forEach(card => {
+        const matches = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hide', !matches);
+      });
+    };
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter;
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        productCards.forEach(card => {
-          const matches = filter === 'all' || card.dataset.category === filter;
-          card.classList.toggle('hide', !matches);
-        });
+        applyFilter(filter);
       });
     });
+    const initialBtn = productsFilterEl.querySelector('.filter-btn.active');
+    if (initialBtn) applyFilter(initialBtn.dataset.filter);
 
     // add a shadow once the filter bar is pinned under the header
     if (typeof IntersectionObserver === 'function') {
