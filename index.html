@@ -371,6 +371,13 @@
   }
   .cut-card h3{font-size:1.12rem;color:var(--bone);padding:1rem 1.1rem 1.2rem;letter-spacing:.02em;}
 
+  /* ============ REVIEW CTA ============ */
+  .review-cta{background:var(--bone);text-align:center;padding:clamp(3rem,7vw,5rem) var(--gutter);}
+  .review-cta .stars{display:flex;justify-content:center;gap:.35rem;margin-bottom:1.1rem;color:#e0a528;}
+  .review-cta .stars svg{width:22px;height:22px;}
+  .review-cta h3{font-size:clamp(1.4rem,3.2vw,2.1rem);color:var(--ink);margin-bottom:1.6rem;}
+  .btn .star{width:16px;height:16px;}
+
   /* ============ QUOTE INTERSTITIAL ============ */
   .quote{
     position:relative;min-height:70vh;display:flex;align-items:center;justify-content:center;
@@ -524,6 +531,10 @@
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-6.5-7-11.5A7 7 0 0 1 19 9.5C19 14.5 12 21 12 21z" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.4"/></svg>
           <span>Δείτε στον χάρτη</span>
         </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Matsis+Meat+%26+Delicatessen%2C+Leoforos+Eleftherias+98%2C+Kremasti" target="_blank" rel="noopener" class="btn" data-magnetic>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg>
+          <span>Αφήστε κριτική</span>
+        </a>
       </div>
     </div>
     <div class="scroll-cue">
@@ -669,6 +680,22 @@
     </div>
   </section>
 
+  <!-- ===================== REVIEW CTA (MIDDLE) ===================== -->
+  <section class="review-cta reveal">
+    <div class="stars" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg>
+    </div>
+    <h3>Μείνατε ευχαριστημένοι; Αφήστε μας μια κριτική</h3>
+    <a href="https://www.google.com/maps/search/?api=1&query=Matsis+Meat+%26+Delicatessen%2C+Leoforos+Eleftherias+98%2C+Kremasti" target="_blank" rel="noopener" class="btn dark" data-magnetic>
+      <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg>
+      <span>Κριτική στο Google</span>
+    </a>
+  </section>
+
   <!-- ===================== QUOTE INTERSTITIAL ===================== -->
   <section class="quote">
     <div class="quote-media" data-parallax="0.12" aria-hidden="true"></div>
@@ -701,6 +728,10 @@
       <div class="hero-cta" style="justify-content:flex-start;margin-top:2.4rem;">
         <a href="https://www.google.com/maps/search/?api=1&query=Matsis+Meat+%26+Delicatessen%2C+Leoforos+Eleftherias+98%2C+Kremasti" target="_blank" rel="noopener" class="btn solid" data-magnetic><span>Οδηγίες πρόσβασης</span></a>
         <a href="tel:+302241092459" class="btn" data-magnetic><span>22410 92459</span></a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Matsis+Meat+%26+Delicatessen%2C+Leoforos+Eleftherias+98%2C+Kremasti" target="_blank" rel="noopener" class="btn" data-magnetic>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 21l1.4-6.8L2.2 9.6l6.9-.7z"/></svg>
+          <span>Αφήστε κριτική</span>
+        </a>
       </div>
     </div>
     <div class="hours-card reveal" data-delay="1">
