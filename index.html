@@ -240,20 +240,15 @@
     align-items:center;justify-content:center;text-align:center;
     padding:7rem var(--gutter) 4rem;color:var(--bone);overflow:hidden;
   }
-  .hero-media{position:absolute;inset:-12% 0 0 0;z-index:0;will-change:transform;}
-  .hero-media::before{
-    content:'';position:absolute;inset:0;
-    background-image:url('photo-storefront.jpg');
-    background-size:cover;background-position:center 38%;
-    transform:scale(1.05);animation:kenburns 22s ease-in-out infinite alternate;
-  }
+  .hero-media{position:absolute;inset:-12% 0 0 0;z-index:0;will-change:transform;background:#0e0e0f url('media/hero-poster.jpg') center/cover;}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
   .hero-media::after{
-    content:'';position:absolute;inset:0;
+    content:'';position:absolute;inset:0;z-index:1;
     background:
       radial-gradient(120% 80% at 50% 30%,rgba(14,14,15,.25),rgba(14,14,15,.78) 75%),
       linear-gradient(180deg,rgba(14,14,15,.55) 0%,rgba(14,14,15,.25) 40%,rgba(14,14,15,.92) 100%);
   }
-  @keyframes kenburns{from{transform:scale(1.05) translateY(0);}to{transform:scale(1.18) translateY(-2%);}}
+  @media (prefers-reduced-motion: reduce){ .hero-video{display:none;} }
   .hero-inner{position:relative;z-index:2;max-width:880px;display:flex;flex-direction:column;align-items:center;}
   .hero-mark{width:clamp(72px,11vw,108px);height:auto;overflow:visible;margin-bottom:1.8rem;
     opacity:0;transform:translateY(20px) scale(.9);filter:drop-shadow(0 0 26px rgba(191,230,236,.25));}
@@ -518,7 +513,11 @@
 
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="top">
-    <div class="hero-media" data-parallax="0.18" aria-hidden="true"></div>
+    <div class="hero-media" data-parallax="0.18" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="media/hero-poster.jpg">
+        <source src="media/hero.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="hero-inner">
       <svg class="hero-mark" id="heroMark" viewBox="0 0 953 479" aria-label="Έμβλημα κεράτων ταύρου Ματσής">
         <path d="M 903.00,354.00 C 901.00,348.17 884.50,336.33 877.00,331.00 C 869.50,325.67 866.00,324.50 858.00,322.00 C 850.00,319.50 842.67,316.83 829.00,316.00 C 815.33,315.17 794.50,314.83 776.00,317.00 C 757.50,319.17 735.33,323.50 718.00,329.00 C 700.67,334.50 687.33,341.00 672.00,350.00 C 656.67,359.00 639.50,371.50 626.00,383.00 C 612.50,394.50 602.50,404.67 591.00,419.00 C 579.50,433.33 547.67,460.67 557.00,469.00 C 566.33,477.33 625.17,475.50 647.00,469.00 C 668.83,462.50 673.50,441.00 688.00,430.00 C 702.50,419.00 718.00,410.17 734.00,403.00 C 750.00,395.83 765.67,390.83 784.00,387.00 C 802.33,383.17 826.50,383.50 844.00,380.00 C 861.50,376.50 879.17,370.33 889.00,366.00 C 898.83,361.67 905.00,359.83 903.00,354.00 Z"/>
