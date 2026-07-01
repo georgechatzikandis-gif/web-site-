@@ -1100,11 +1100,17 @@
     var hv = document.getElementById('heroVideo');
     if(!hv) return;
     hv.muted = true; hv.setAttribute('muted','');
-    function tryPlay(){ var p = hv.play(); if(p && p.catch) p.catch(function(){}); }
+    // start playback from the very beginning if it wasn't already running
+    function tryPlay(){
+      if(hv.paused){
+        try{ hv.currentTime = 0; }catch(e){}
+        var p = hv.play(); if(p && p.catch) p.catch(function(){});
+      }
+    }
     tryPlay();
     hv.addEventListener('loadeddata', tryPlay, {once:true});
     hv.addEventListener('canplay', tryPlay, {once:true});
-    // if autoplay was blocked (e.g. Low Power Mode), start on first interaction
+    // if autoplay was blocked (e.g. Low Power Mode), start from the top on first interaction
     ['touchstart','pointerdown','click','scroll','keydown'].forEach(function(ev){
       window.addEventListener(ev, function h(){ tryPlay(); }, {once:true, passive:true});
     });
