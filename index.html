@@ -1100,19 +1100,22 @@
     var hv = document.getElementById('heroVideo');
     if(!hv) return;
     hv.muted = true; hv.setAttribute('muted','');
-    // start playback from the very beginning if it wasn't already running
-    function tryPlay(){
-      if(hv.paused){
-        try{ hv.currentTime = 0; }catch(e){}
-        var p = hv.play(); if(p && p.catch) p.catch(function(){});
-      }
-    }
+    // force playback to begin at the very start of the clip
+    hv.addEventListener('loadedmetadata', function(){ try{ hv.currentTime = 0; }catch(e){} }, {once:true});
+    // safety net: the first time it actually plays, if it started past the
+    // beginning (deferred autoplay etc.), snap it back to 0 so the whole clip plays
+    var snapped = false;
+    hv.addEventListener('playing', function(){
+      if(snapped) return; snapped = true;
+      if(hv.currentTime > 0.4){ try{ hv.currentTime = 0; }catch(e){} }
+    }, {once:true});
+    function tryPlay(){ var p = hv.play(); if(p && p.catch) p.catch(function(){}); }
     tryPlay();
     hv.addEventListener('loadeddata', tryPlay, {once:true});
     hv.addEventListener('canplay', tryPlay, {once:true});
     // if autoplay was blocked (e.g. Low Power Mode), start from the top on first interaction
     ['touchstart','pointerdown','click','scroll','keydown'].forEach(function(ev){
-      window.addEventListener(ev, function h(){ tryPlay(); }, {once:true, passive:true});
+      window.addEventListener(ev, function h(){ if(hv.paused){ try{ hv.currentTime = 0; }catch(e){} } tryPlay(); }, {once:true, passive:true});
     });
     document.addEventListener('visibilitychange', function(){ if(!document.hidden) tryPlay(); });
   })();
