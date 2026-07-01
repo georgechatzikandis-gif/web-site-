@@ -536,7 +536,7 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="top">
     <div class="hero-media" data-parallax="0.18" aria-hidden="true">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="media/hero-poster.jpg">
+      <video class="hero-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture poster="media/hero-poster.jpg">
         <source src="media/hero.mp4" type="video/mp4">
       </video>
     </div>
@@ -1094,6 +1094,22 @@
   [].slice.call(document.querySelectorAll('a[href^="#"]')).forEach(function(a){
     a.addEventListener('click', function(){ closeMenu(); });
   });
+
+  /* ---------- HERO VIDEO AUTOPLAY FALLBACK ---------- */
+  (function(){
+    var hv = document.getElementById('heroVideo');
+    if(!hv) return;
+    hv.muted = true; hv.setAttribute('muted','');
+    function tryPlay(){ var p = hv.play(); if(p && p.catch) p.catch(function(){}); }
+    tryPlay();
+    hv.addEventListener('loadeddata', tryPlay, {once:true});
+    hv.addEventListener('canplay', tryPlay, {once:true});
+    // if autoplay was blocked (e.g. Low Power Mode), start on first interaction
+    ['touchstart','pointerdown','click','scroll','keydown'].forEach(function(ev){
+      window.addEventListener(ev, function h(){ tryPlay(); }, {once:true, passive:true});
+    });
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden) tryPlay(); });
+  })();
 
   /* ---------- BACK TO TOP ---------- */
   (function(){
