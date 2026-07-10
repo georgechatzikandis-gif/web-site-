@@ -110,6 +110,46 @@
   .to-top:hover{background:var(--oxblood-bright);border-color:var(--oxblood-bright);}
   .to-top svg{width:18px;height:18px;}
 
+  /* ============ CHOICE GATE ============ */
+  .gate{
+    position:fixed;inset:0;z-index:9500;background:var(--ink);color:var(--bone);overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden;transition:opacity .7s var(--ease),visibility .7s;
+  }
+  .gate.show{opacity:1;visibility:visible;}
+  .gate.hide{opacity:0;visibility:hidden;}
+  .gate-bg{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:min(135vw,1200px);height:auto;opacity:.1;pointer-events:none;z-index:0;
+  }
+  .gate-bg path{fill:var(--bone);}
+  .gate::after{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(60% 60% at 50% 45%,transparent,rgba(14,14,15,.6));pointer-events:none;}
+  .gate-inner{position:relative;z-index:2;width:100%;max-width:1040px;padding:2rem clamp(1.2rem,5vw,3rem);text-align:center;}
+  .gate-inner .eyebrow{justify-content:center;}
+  .gate-title{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:clamp(1.6rem,4.4vw,2.7rem);margin:1rem 0 2.4rem;}
+  .gate-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+  .gate-card{
+    background:rgba(244,243,239,.03);border:1px solid var(--line);padding:clamp(1.8rem,4vw,2.8rem) 1.3rem;
+    color:var(--bone);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.9rem;
+    opacity:0;transform:translateY(24px);
+    transition:transform .5s var(--ease),background .4s ease,border-color .4s ease,opacity .6s var(--ease);
+  }
+  .gate.show .gate-card{opacity:1;transform:translateY(0);}
+  .gate.show .gate-card:nth-child(1){transition-delay:.15s;}
+  .gate.show .gate-card:nth-child(2){transition-delay:.27s;}
+  .gate.show .gate-card:nth-child(3){transition-delay:.39s;}
+  .gate-card:hover{transform:translateY(-6px);background:rgba(166,48,48,.14);border-color:var(--oxblood-bright);}
+  .gate-card .gc-icon{width:44px;height:44px;stroke:var(--oxblood-bright);fill:none;flex:none;}
+  .gc-info{display:flex;flex-direction:column;align-items:center;gap:.35rem;}
+  .gc-label{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1;}
+  .gc-sub{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel-dim);}
+  @media (max-width:720px){
+    .gate-choices{grid-template-columns:1fr;gap:.8rem;max-width:420px;margin:0 auto;}
+    .gate-card{flex-direction:row;justify-content:flex-start;gap:1.1rem;padding:1.2rem 1.3rem;text-align:left;}
+    .gate-card .gc-icon{width:34px;height:34px;}
+    .gc-info{align-items:flex-start;gap:.2rem;}
+  }
+
   /* ============ PRELOADER ============ */
   .preloader{
     position:fixed;inset:0;z-index:10000;
@@ -504,6 +544,29 @@
   </div>
 </div>
 
+<!-- ===================== CHOICE GATE ===================== -->
+<div class="gate" id="gate" aria-hidden="true">
+  <svg class="gate-bg" viewBox="0 0 953 479" aria-hidden="true"><use href="#bull"/></svg>
+  <div class="gate-inner">
+    <p class="eyebrow">Ματσής — Κρέατα &amp; Αλλαντικά</p>
+    <h2 class="gate-title">Πώς θα θέλατε να ψωνίσετε;</h2>
+    <div class="gate-choices">
+      <button class="gate-card" data-target="#top" type="button">
+        <svg class="gc-icon" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 11a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1L6 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="gc-info"><span class="gc-label">Λιανική</span><span class="gc-sub">Για τον καταναλωτή</span></span>
+      </button>
+      <button class="gate-card" data-target="#visit" type="button">
+        <svg class="gc-icon" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h11v9H2zM13 10h4l4 3.5V16h-8z"/><circle cx="6.5" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>
+        <span class="gc-info"><span class="gc-label">Ντελίβερι</span><span class="gc-sub">Παράδοση στον χώρο σας</span></span>
+      </button>
+      <button class="gate-card" data-target="#visit" type="button">
+        <svg class="gc-icon" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8M12 12v8"/></svg>
+        <span class="gc-info"><span class="gc-label">Χονδρική</span><span class="gc-sub">Για επαγγελματίες</span></span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <a href="#main" class="skip-link">Μετάβαση στο περιεχόμενο</a>
 
 <!-- ===================== HEADER ===================== -->
@@ -819,7 +882,6 @@
 
   /* ---------- PRELOADER ---------- */
   function startSite(){
-    doc.classList.remove('is-loading');
     var hero = document.querySelector('.hero');
     if(hero){
       requestAnimationFrame(function(){ hero.classList.add('in'); });
@@ -827,6 +889,30 @@
       // light the hero mark fill shortly after it appears
       setTimeout(function(){ if(hm) hm.classList.add('lit'); }, 700);
     }
+    showGate();
+  }
+
+  function showGate(){
+    var gate = document.getElementById('gate');
+    if(!gate){ doc.classList.remove('is-loading'); return; }
+    if(gate.dataset.shown){ return; }
+    gate.dataset.shown = '1';
+    // reveal the choice screen; keep scroll locked (is-loading) until a choice is made
+    requestAnimationFrame(function(){ gate.classList.add('show'); });
+    var chosen = false;
+    [].slice.call(gate.querySelectorAll('.gate-card')).forEach(function(card){
+      card.addEventListener('click', function(){
+        if(chosen) return; chosen = true;
+        var target = card.getAttribute('data-target');
+        gate.classList.add('hide');
+        doc.classList.remove('is-loading');
+        window.scrollTo(0, 0);
+        setTimeout(function(){ if(gate.parentNode) gate.parentNode.removeChild(gate); }, 800);
+        if(target && target !== '#top'){
+          setTimeout(function(){ var el = document.querySelector(target); if(el) el.scrollIntoView({behavior:'smooth'}); }, 550);
+        }
+      });
+    });
   }
 
   function runPreloader(){
