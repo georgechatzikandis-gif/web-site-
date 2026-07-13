@@ -945,6 +945,10 @@
       [].slice.call(document.querySelectorAll('[data-open-gate]')).forEach(function(el){
         el.addEventListener('click', function(e){ e.preventDefault(); closeMenu(); openGate(); });
       });
+      // tapping anywhere on the gate kicks the video off (fallback for blocked autoplay)
+      ['pointerdown','touchstart'].forEach(function(ev){
+        gate.addEventListener(ev, function(){ playGateVideo(); }, {passive:true});
+      });
     }
     // initial reveal; scroll stays locked until a choice is made
     requestAnimationFrame(function(){ gate.classList.add('show'); playGateVideo(); });
