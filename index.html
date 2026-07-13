@@ -118,19 +118,20 @@
   }
   .gate.show{opacity:1;visibility:visible;}
   .gate.hide{opacity:0;visibility:hidden;}
+  .gate-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
   .gate-bg{
     position:absolute;left:50%;top:50%;
-    width:min(135vw,1200px);height:auto;pointer-events:none;z-index:0;
+    width:min(135vw,1200px);height:auto;pointer-events:none;z-index:2;
     transform:translate(-50%,-50%);opacity:.1;
     transform-origin:center;animation:gateLogoBreathe 9s ease-in-out infinite;
   }
   .gate-bg path{fill:var(--bone);}
   @keyframes gateLogoBreathe{
-    0%,100%{transform:translate(-50%,-50%) scale(1) rotate(-1.6deg);opacity:.07;}
-    50%{transform:translate(-50%,-50%) scale(1.06) rotate(1.6deg);opacity:.15;}
+    0%,100%{transform:translate(-50%,-50%) scale(1) rotate(-1.6deg);opacity:.06;}
+    50%{transform:translate(-50%,-50%) scale(1.06) rotate(1.6deg);opacity:.12;}
   }
-  .gate::after{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(60% 60% at 50% 45%,transparent,rgba(14,14,15,.6));pointer-events:none;}
-  .gate-inner{position:relative;z-index:2;width:100%;max-width:1040px;padding:2rem clamp(1.2rem,5vw,3rem);text-align:center;}
+  .gate::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,14,15,.62),rgba(14,14,15,.72));pointer-events:none;}
+  .gate-inner{position:relative;z-index:3;width:100%;max-width:1040px;padding:2rem clamp(1.2rem,5vw,3rem);text-align:center;}
   .gate-inner .eyebrow{justify-content:center;}
   .gate-title{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:clamp(1.6rem,4.4vw,2.7rem);margin:1rem 0 2.4rem;}
   .gate-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
@@ -552,6 +553,9 @@
 
 <!-- ===================== CHOICE GATE ===================== -->
 <div class="gate" id="gate" aria-hidden="true">
+  <video class="gate-video" id="gateVideo" autoplay muted loop playsinline preload="auto" poster="media/hero-poster.jpg">
+    <source src="media/hero.mp4" type="video/mp4">
+  </video>
   <svg class="gate-bg" viewBox="0 0 953 479" aria-hidden="true"><use href="#bull"/></svg>
   <div class="gate-inner">
     <p class="eyebrow">Ματσής — Κρέατα &amp; Αλλαντικά</p>
@@ -900,6 +904,10 @@
     showGate();
   }
 
+  function playGateVideo(){
+    var gv = document.getElementById('gateVideo');
+    if(gv){ gv.muted = true; var p = gv.play(); if(p && p.catch) p.catch(function(){}); }
+  }
   function openGate(){
     var gate = document.getElementById('gate');
     if(!gate) return;
@@ -907,6 +915,7 @@
     gate.classList.add('show');
     doc.classList.add('is-loading');
     window.scrollTo(0, 0);
+    playGateVideo();
   }
   function closeGate(target){
     var gate = document.getElementById('gate');
@@ -914,6 +923,9 @@
     gate.classList.remove('show');
     gate.classList.add('hide');
     doc.classList.remove('is-loading');
+    // use this tap (a real user gesture) to kick off the hero video if autoplay was blocked
+    var hv = document.querySelector('.hero-video');
+    if(hv){ hv.muted = true; var pr = hv.play(); if(pr && pr.catch) pr.catch(function(){}); }
     if(target && target !== '#top'){
       setTimeout(function(){ var el = document.querySelector(target); if(el) el.scrollIntoView({behavior:'smooth'}); }, 500);
     } else {
@@ -935,7 +947,7 @@
       });
     }
     // initial reveal; scroll stays locked until a choice is made
-    requestAnimationFrame(function(){ gate.classList.add('show'); });
+    requestAnimationFrame(function(){ gate.classList.add('show'); playGateVideo(); });
   }
 
   function runPreloader(){
