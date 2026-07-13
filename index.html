@@ -585,6 +585,7 @@
     <a href="#about">Ιστορία</a>
     <a href="#cuts">Επιλεγμένα</a>
     <a href="#visit">Επισκεφθείτε</a>
+    <a href="#" class="nav-gate" data-open-gate>Επιλογές</a>
   </nav>
   <a href="tel:+302241092459" class="header-call">
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2c-9 0-16-7-16-16a2 2 0 012-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -597,6 +598,7 @@
   <a href="#about">Ιστορία</a>
   <a href="#cuts">Επιλεγμένα Κρέατα</a>
   <a href="#visit">Επισκεφθείτε μας</a>
+  <a href="#" data-open-gate>Επιλογές (Λιανική / Χονδρική)</a>
   <a href="tel:+302241092459">Καλέστε για παραγγελία</a>
 </nav>
 
@@ -898,27 +900,42 @@
     showGate();
   }
 
+  function openGate(){
+    var gate = document.getElementById('gate');
+    if(!gate) return;
+    gate.classList.remove('hide');
+    gate.classList.add('show');
+    doc.classList.add('is-loading');
+    window.scrollTo(0, 0);
+  }
+  function closeGate(target){
+    var gate = document.getElementById('gate');
+    if(!gate) return;
+    gate.classList.remove('show');
+    gate.classList.add('hide');
+    doc.classList.remove('is-loading');
+    if(target && target !== '#top'){
+      setTimeout(function(){ var el = document.querySelector(target); if(el) el.scrollIntoView({behavior:'smooth'}); }, 500);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
   function showGate(){
     var gate = document.getElementById('gate');
     if(!gate){ doc.classList.remove('is-loading'); return; }
-    if(gate.dataset.shown){ return; }
-    gate.dataset.shown = '1';
-    // reveal the choice screen; keep scroll locked (is-loading) until a choice is made
-    requestAnimationFrame(function(){ gate.classList.add('show'); });
-    var chosen = false;
-    [].slice.call(gate.querySelectorAll('.gate-card')).forEach(function(card){
-      card.addEventListener('click', function(){
-        if(chosen) return; chosen = true;
-        var target = card.getAttribute('data-target');
-        gate.classList.add('hide');
-        doc.classList.remove('is-loading');
-        window.scrollTo(0, 0);
-        setTimeout(function(){ if(gate.parentNode) gate.parentNode.removeChild(gate); }, 800);
-        if(target && target !== '#top'){
-          setTimeout(function(){ var el = document.querySelector(target); if(el) el.scrollIntoView({behavior:'smooth'}); }, 550);
-        }
+    if(!gate.dataset.bound){
+      gate.dataset.bound = '1';
+      // choosing an option closes the gate (kept in the DOM so it can reopen)
+      [].slice.call(gate.querySelectorAll('.gate-card')).forEach(function(card){
+        card.addEventListener('click', function(){ closeGate(card.getAttribute('data-target')); });
       });
-    });
+      // menu items marked data-open-gate reopen the choice screen
+      [].slice.call(document.querySelectorAll('[data-open-gate]')).forEach(function(el){
+        el.addEventListener('click', function(e){ e.preventDefault(); closeMenu(); openGate(); });
+      });
+    }
+    // initial reveal; scroll stays locked until a choice is made
+    requestAnimationFrame(function(){ gate.classList.add('show'); });
   }
 
   function runPreloader(){
@@ -1043,8 +1060,8 @@
   }
 
   /* ---------- ACTIVE NAV ---------- */
-  var navLinks = [].slice.call(document.querySelectorAll('.nav a'));
-  var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  var navLinks = [].slice.call(document.querySelectorAll('.nav a[href^="#"]:not([data-open-gate])'));
+  var sections = navLinks.map(function(a){ var h = a.getAttribute('href'); return (h && h.length > 1) ? document.querySelector(h) : null; });
   if('IntersectionObserver' in window){
     var nio = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
