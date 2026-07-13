@@ -365,19 +365,6 @@
   .scroll-cue svg{width:13px;height:22px;animation:bob 1.8s ease-in-out infinite;}
   @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
 
-  /* ============ MARQUEE ============ */
-  .marquee{
-    background:var(--ink);color:var(--bone);padding:1.15rem 0;overflow:hidden;
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-    white-space:nowrap;
-  }
-  .marquee-track{display:inline-flex;animation:scroll-x 32s linear infinite;}
-  .marquee-track span{
-    font-family:'Oswald',sans-serif;text-transform:uppercase;font-weight:500;
-    font-size:1.05rem;letter-spacing:.08em;padding:0 1.6rem;display:inline-flex;align-items:center;
-  }
-  .marquee-track span::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--oxblood-bright);margin-left:3.2rem;}
-  @keyframes scroll-x{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
   /* ============ ABOUT ============ */
   .about{position:relative;overflow:hidden;color:var(--bone);display:flex;align-items:center;min-height:82vh;}
@@ -646,14 +633,6 @@
       <svg viewBox="0 0 14 22" fill="none"><path d="M7 1V21M7 21L1 15M7 21L13 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </section>
-
-  <!-- ===================== MARQUEE ===================== -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Ξηρή Ωρίμανση Μοσχαριού</span><span>Σπιτικά Αλλαντικά</span><span>Κοπή Ολόκληρου Ζώου</span><span>Λουκάνικα Μικρής Παραγωγής</span><span>Ωρίμανση επί Τόπου</span><span>Από το 1975</span>
-      <span>Ξηρή Ωρίμανση Μοσχαριού</span><span>Σπιτικά Αλλαντικά</span><span>Κοπή Ολόκληρου Ζώου</span><span>Λουκάνικα Μικρής Παραγωγής</span><span>Ωρίμανση επί Τόπου</span><span>Από το 1975</span>
-    </div>
-  </div>
 
   <!-- ===================== ABOUT ===================== -->
   <section class="about section" id="about">
