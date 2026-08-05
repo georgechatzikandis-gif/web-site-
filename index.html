@@ -118,7 +118,7 @@
   }
   .gate.show{opacity:1;visibility:visible;}
   .gate.hide{opacity:0;visibility:hidden;}
-  .gate-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+  .gate-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 34%;z-index:0;}
   .gate-bg{
     position:absolute;left:50%;top:50%;
     width:min(135vw,1200px);height:auto;pointer-events:none;z-index:2;
@@ -560,10 +560,7 @@
 
 <!-- ===================== CHOICE GATE ===================== -->
 <div class="gate" id="gate" aria-hidden="true">
-  <video class="gate-video" id="gateVideo" autoplay muted loop playsinline preload="auto" poster="media/hero-poster.jpg">
-    <source src="media/hero.mp4" type="video/mp4">
-  </video>
-  <svg class="gate-bg" viewBox="0 0 953 479" aria-hidden="true"><use href="#bull"/></svg>
+  <img class="gate-photo" src="media/gate-bg.jpg" alt="" aria-hidden="true">
   <div class="gate-inner">
     <p class="eyebrow">Ματσής — Κρέατα &amp; Αλλαντικά</p>
     <h2 class="gate-title">Πώς θα θέλατε να ψωνίσετε;</h2>
