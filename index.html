@@ -300,7 +300,7 @@
     align-items:center;justify-content:center;text-align:center;
     padding:7rem var(--gutter) 4rem;color:var(--bone);overflow:hidden;
   }
-  .hero-media{position:absolute;inset:-12% 0 0 0;z-index:0;will-change:transform;background:#0e0e0f url('media/hero-poster.jpg') center/cover;}
+  .hero-media{position:absolute;inset:-12% 0 0 0;z-index:0;will-change:transform;background:#0e0e0f url('media/hero-desktop-poster.jpg') center/cover;}
   .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
   .hero-media::after{
     content:'';position:absolute;inset:0;z-index:1;
@@ -618,9 +618,7 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="top">
     <div class="hero-media" data-parallax="0.18" aria-hidden="true">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="media/hero-poster.jpg">
-        <source src="media/hero.mp4" type="video/mp4">
-      </video>
+      <video class="hero-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="media/hero-desktop-poster.jpg"></video>
     </div>
     <div class="hero-inner">
       <svg class="hero-mark" id="heroMark" viewBox="0 0 953 479" aria-label="Έμβλημα κεράτων ταύρου Ματσής">
@@ -892,6 +890,17 @@
   var doc = document.documentElement;
   var currentLang = 'el';
   try{ var _sl = localStorage.getItem('lang'); if(_sl){ currentLang = _sl; } }catch(e){}
+
+  /* ---------- HERO VIDEO (responsive source: phone 9:16 / desktop 16:9) ---------- */
+  (function(){
+    var hv = document.getElementById('heroVideo');
+    if(!hv) return;
+    var big = window.matchMedia('(min-width: 768px)').matches;
+    hv.setAttribute('poster', big ? 'media/hero-desktop-poster.jpg' : 'media/hero-phone-poster.jpg');
+    hv.src = big ? 'media/hero-desktop.mp4' : 'media/hero-phone.mp4';
+    hv.muted = true;
+    var p = hv.play(); if(p && p.catch){ p.catch(function(){}); }
+  })();
 
   /* ---------- PRELOADER ---------- */
   function startSite(){
