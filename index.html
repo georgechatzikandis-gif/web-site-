@@ -134,8 +134,10 @@
     background:radial-gradient(95% 75% at 50% 50%,rgba(14,14,15,.55) 0%,rgba(14,14,15,.72) 100%);
   }
   .gate-inner{position:relative;z-index:3;width:100%;max-width:1040px;padding:2rem clamp(1.2rem,5vw,3rem);text-align:center;}
+  .gate-logo{width:64px;height:auto;margin:0 auto 1.2rem;display:block;}
+  .gate-logo{fill:var(--bone);}
   .gate-inner .eyebrow{justify-content:center;}
-  .gate-title{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:clamp(1.6rem,4.4vw,2.7rem);margin:1rem 0 2.4rem;}
+  .gate-title{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:clamp(1.6rem,4.4vw,2.7rem);margin:.8rem 0 3.2rem;}
   .gate-choices{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;max-width:720px;margin:0 auto;}
   .gate-card{
     background:rgba(244,243,239,.03);border:1px solid var(--line);padding:clamp(1.8rem,4vw,2.8rem) 1.3rem;
@@ -216,7 +218,7 @@
   .logo{display:flex;align-items:center;gap:.7rem;color:var(--bone);}
   .logo-mark{width:42px;height:auto;flex:none;transition:transform .5s var(--ease);}
   .logo:hover .logo-mark{transform:rotate(-4deg) scale(1.05);}
-  .logo-mark path{fill:var(--bone);}
+  .logo-mark{fill:var(--bone);}
   .logo-word{font-family:'Oswald',sans-serif;font-weight:400;letter-spacing:.24em;font-size:1.05rem;padding-left:.24em;}
   .nav{display:flex;gap:2.2rem;align-items:center;}
   .nav a{
@@ -481,7 +483,7 @@
   .footer-top{max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--line);}
   .footer-brand{display:flex;align-items:center;gap:1rem;}
   .footer-brand svg{width:48px;height:auto;}
-  .footer-brand svg path{fill:var(--bone);}
+  .footer-brand svg{fill:var(--bone);}
   .footer-brand span{font-family:'Oswald',sans-serif;letter-spacing:.14em;font-size:.95rem;}
   .footer-links{list-style:none;display:flex;gap:1.8rem;flex-wrap:wrap;}
   .footer-links a{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);transition:color .3s;}
@@ -571,6 +573,7 @@
     <img class="gate-photo" id="gatePhoto" src="media/gate-bg-phone.jpg" alt="" aria-hidden="true">
   </picture>
   <div class="gate-inner">
+    <svg class="gate-logo" viewBox="0 0 953 479" aria-label="Ματσής"><use href="#bull"/></svg>
     <p class="eyebrow" data-en="Matsis — Meat &amp; Delicatessen">Ματσής — Κρέατα &amp; Αλλαντικά</p>
     <h2 class="gate-title" data-en="How would you like to shop?">Πώς θα θέλατε να ψωνίσετε;</h2>
     <div class="gate-choices">
