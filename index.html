@@ -118,7 +118,7 @@
   }
   .gate.show{opacity:1;visibility:visible;}
   .gate.hide{opacity:0;visibility:hidden;}
-  .gate-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 34%;z-index:0;}
+  .gate-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:0;}
   .gate-bg{
     position:absolute;left:50%;top:50%;
     width:min(135vw,1200px);height:auto;pointer-events:none;z-index:2;
@@ -130,7 +130,7 @@
     0%,100%{transform:translate(-50%,-50%) scale(1) rotate(-1.6deg);opacity:.06;}
     50%{transform:translate(-50%,-50%) scale(1.06) rotate(1.6deg);opacity:.12;}
   }
-  .gate::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,14,15,.62),rgba(14,14,15,.72));pointer-events:none;}
+  .gate::after{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(95% 75% at 50% 50%,rgba(14,14,15,.55) 0%,rgba(14,14,15,.74) 100%);pointer-events:none;}
   .gate-inner{position:relative;z-index:3;width:100%;max-width:1040px;padding:2rem clamp(1.2rem,5vw,3rem);text-align:center;}
   .gate-inner .eyebrow{justify-content:center;}
   .gate-title{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:clamp(1.6rem,4.4vw,2.7rem);margin:1rem 0 2.4rem;}
@@ -564,7 +564,10 @@
 
 <!-- ===================== CHOICE GATE ===================== -->
 <div class="gate" id="gate" aria-hidden="true">
-  <img class="gate-photo" src="media/gate-bg.jpg" alt="" aria-hidden="true">
+  <picture>
+    <source media="(min-width: 768px)" srcset="media/gate-bg-desktop.jpg">
+    <img class="gate-photo" id="gatePhoto" src="media/gate-bg-phone.jpg" alt="" aria-hidden="true">
+  </picture>
   <div class="gate-inner">
     <p class="eyebrow" data-en="Matsis — Meat &amp; Delicatessen">Ματσής — Κρέατα &amp; Αλλαντικά</p>
     <h2 class="gate-title" data-en="How would you like to shop?">Πώς θα θέλατε να ψωνίσετε;</h2>
