@@ -133,11 +133,15 @@
   .gate::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(180deg,rgba(14,14,15,.6) 0%,rgba(14,14,15,.7) 14%,rgba(14,14,15,.92) 34%,rgba(14,14,15,.94) 72%,rgba(14,14,15,.7) 90%,rgba(14,14,15,.6) 100%);
   }
-  .gate-inner{position:relative;z-index:3;width:100%;max-width:1040px;padding:2rem clamp(1.2rem,5vw,3rem);text-align:center;}
+  .gate-inner{position:relative;z-index:3;width:100%;max-width:1040px;padding:2rem clamp(1.2rem,5vw,3rem);text-align:center;
+    display:flex;flex-direction:column;justify-content:space-between;align-items:center;
+    height:min(74vh,640px);
+  }
+  .gate-top{width:100%;}
   .gate-logo{width:64px;height:auto;margin:0 auto 1.2rem;display:block;}
   .gate-logo{fill:var(--bone);}
   .gate-inner .eyebrow{justify-content:center;}
-  .gate-title{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:clamp(1.6rem,4.4vw,2.7rem);margin:.8rem 0 3.2rem;}
+  .gate-title{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:clamp(1.6rem,4.4vw,2.7rem);margin:.8rem 0 0;}
   .gate-choices{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;max-width:720px;margin:0 auto;}
   .gate-card{
     background:rgba(244,243,239,.03);border:1px solid var(--line);padding:clamp(1.8rem,4vw,2.8rem) 1.3rem;
@@ -573,9 +577,11 @@
     <img class="gate-photo" id="gatePhoto" src="media/gate-bg-phone.jpg" alt="" aria-hidden="true">
   </picture>
   <div class="gate-inner">
-    <svg class="gate-logo" viewBox="0 0 953 479" aria-label="Ματσής"><use href="#bull"/></svg>
-    <p class="eyebrow" data-en="Matsis — Meat &amp; Delicatessen">Ματσής — Κρέατα &amp; Αλλαντικά</p>
-    <h2 class="gate-title" data-en="How would you like to shop?">Πώς θα θέλατε να ψωνίσετε;</h2>
+    <div class="gate-top">
+      <svg class="gate-logo" viewBox="0 0 953 479" aria-label="Ματσής"><use href="#bull"/></svg>
+      <p class="eyebrow" data-en="Matsis — Meat &amp; Delicatessen">Ματσής — Κρέατα &amp; Αλλαντικά</p>
+      <h2 class="gate-title" data-en="How would you like to shop?">Πώς θα θέλατε να ψωνίσετε;</h2>
+    </div>
     <div class="gate-choices">
       <button class="gate-card" data-target="#top" type="button">
         <svg class="gc-icon" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 11a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1L6 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
