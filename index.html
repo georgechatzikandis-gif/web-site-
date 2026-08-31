@@ -484,15 +484,22 @@
 
   /* ============ FOOTER ============ */
   footer{background:var(--ink);color:var(--bone);border-top:1px solid var(--line);padding:clamp(3rem,6vw,4.5rem) var(--gutter) 2rem;}
-  .footer-top{max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--line);}
+  .footer-top{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.3fr .8fr 1.1fr;gap:2.4rem;padding-bottom:2.5rem;border-bottom:1px solid var(--line);align-items:start;}
   .footer-brand{display:flex;align-items:center;gap:1rem;}
   .footer-brand svg{width:48px;height:auto;}
   .footer-brand svg{fill:var(--bone);}
   .footer-brand span{font-family:'Oswald',sans-serif;letter-spacing:.14em;font-size:.95rem;}
-  .footer-links{list-style:none;display:flex;gap:1.8rem;flex-wrap:wrap;}
+  .footer-tagline{font-size:.82rem;color:var(--steel);margin-top:.9rem;max-width:30ch;line-height:1.6;}
+  .footer-col-title{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--steel-dim);margin-bottom:1rem;}
+  .footer-links{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
   .footer-links a{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);transition:color .3s;}
   .footer-links a:hover{color:var(--bone);}
+  .footer-contact{list-style:none;display:flex;flex-direction:column;gap:.75rem;font-size:.82rem;color:var(--steel);line-height:1.5;}
+  .footer-contact a{color:var(--steel);transition:color .3s;border-bottom:1px solid transparent;}
+  .footer-contact a:hover{color:var(--bone);border-color:var(--steel);}
   .footer-bottom{max-width:1240px;margin:1.8rem auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.1em;color:var(--steel-dim);}
+  @media (max-width:820px){ .footer-top{grid-template-columns:1fr 1fr;} .footer-brand{grid-column:1/-1;} }
+  @media (max-width:540px){ .footer-top{grid-template-columns:1fr;} }
 
   /* ============ REVEAL ============ */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease);}
@@ -519,7 +526,6 @@
     .cuts .section-head{align-items:flex-start;}
   }
   @media (max-width:540px){
-    .footer-top{flex-direction:column;align-items:flex-start;}
     .hero-cta .btn{flex:1 1 100%;justify-content:center;}
   }
   /* ---- large screens: scale the whole site up proportionally (PC / iPad / TV) ---- */
@@ -871,16 +877,30 @@
 
 <footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <svg viewBox="0 0 953 479" aria-hidden="true"><use href="#bull"/></svg>
-      <span>MATSIS — MEAT &amp; DELICATESSEN</span>
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <svg viewBox="0 0 953 479" aria-hidden="true"><use href="#bull"/></svg>
+        <span>MATSIS — MEAT &amp; DELICATESSEN</span>
+      </div>
+      <p class="footer-tagline" data-en="Fresh meat and homemade cured meats from the same counter, since 1975.">Φρέσκο κρέας και σπιτικά αλλαντικά από τον ίδιο πάγκο, από το 1975.</p>
     </div>
-    <ul class="footer-links">
-      <li><a href="#about" data-en="History">Ιστορία</a></li>
-      <li><a href="#cuts" data-en="Our products">Τα προϊόντα μας</a></li>
-      <li><a href="#visit" data-en="Visit Us">Επισκεφθείτε μας</a></li>
-      <li><a href="wholesale.html" data-en="Wholesale">Χονδρική</a></li>
-    </ul>
+    <div>
+      <p class="footer-col-title" data-en="Explore">Πλοήγηση</p>
+      <ul class="footer-links">
+        <li><a href="#about" data-en="History">Ιστορία</a></li>
+        <li><a href="#cuts" data-en="Our products">Τα προϊόντα μας</a></li>
+        <li><a href="#visit" data-en="Visit Us">Επισκεφθείτε μας</a></li>
+        <li><a href="wholesale.html" data-en="Wholesale">Χονδρική</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title" data-en="Contact">Επικοινωνία</p>
+      <ul class="footer-contact">
+        <li data-en="Λεωφ. Eleftherias 98, Kremasti, Rhodes">Λεωφ. Ελευθερίας 98, Κρεμαστή, Ρόδος</li>
+        <li><a href="tel:+302241092459">22410 92459</a> &middot; <a href="tel:+302241094984">22410 94984</a></li>
+        <li data-en="Mon–Sat 6:30–22:00 &middot; Sun 6:30–15:00">Δευ–Σάβ 6:30–22:00 &middot; Κυρ 6:30–15:00</li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">
     <span data-en="SINCE 1975 — KREMASTI, RHODES">ΑΠΟ ΤΟ 1975 — ΚΡΕΜΑΣΤΗ, ΡΟΔΟΣ</span>
